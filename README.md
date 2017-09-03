@@ -165,6 +165,114 @@ Solution:
 `fetch` response has `ok` property that can be used as an indicator of your request result.
 
 
+### Component vs PureComponent vs "stateless component"
+
+[Good note about it.](https://stackoverflow.com/questions/40703675/react-functional-stateless-component-purecomponent-component-what-are-the-dif)
+
+```javascript
+if (componentHasNoState) {
+  return itsStatelessComponent()
+} else if (componentHasSimplePropsState && propsHasNoNestedObjects) {
+  return itsPureComponent()
+} else {
+  return itsComponent()
+}
+```
+
+### Containers vs Components
+
+Follow Dan's guide:
+
+- **Container** - "smart" React component connected to Redux state.
+- **Component** - "dumb" React component that use only own props. Can't be connected to Redux.
+
+### Containers
+
+Almost every container (except very-very simple) has own `/components` folder where it stores:
+
+- components specific for this route
+- main container's component ("root" component)
+
+Example:
+
+- container = `containers/App/index.jsx`
+- specific components = `containers/App/components/SomeAppItem.jsx`
+- "root" component = `containers/App/components/index.jsx`
+
+### Components
+
+I recommend to use components structure from Semantic.UI. I found it very useful in few projects.<br>
+[Semantic.UI's glossary and explanations](http://learnsemantic.com/developing/glossary.html)
+
+"Component" doesn't mean app's components inside containers. (e.g not `containers/**/components`)
+
+> A component is a general term used to refer to any user interface element packaged for distribution.
+
+### Parts
+
+Imagine that you have `Sidebar` component configured from `App` container, then **`Sidebar` is a singleton**. Store components that **exist in a single instance in "Parts"**.          
+Another example: only one instance of `Header` could live in a whole app.
+
+#### Views
+
+> A view is a common design trope for presenting specific types of website content like comments, or user activity. These are common views like, comments, activity feeds, content cards, that are presented in a similar fashion across most websites.
+
+If component is a **huge**, **contains many other components** inside itself and **takes a big place in UI**, but **it's dumb**(or not so "smart" to be called module) then it's probably a "View" component. View:
+
+Summary:
+
+- huge component
+- takes a big place in UI
+- dumb or not so smart to be called "Module"
+- has many components inside
+
+#### Addons
+
+Component is an _addon_, if this component is a commonly used component **built on top of another component**, includes **some custom code**, is a **wrapper** for another component, or just a thing that must be **delegated to a separate lib.**
+
+Summary:
+
+- build on top of another component (!, otherwise it's a Module)
+- include some custom code (enough "smart")
+- is a wrapper for another component
+- small lib implemented inside the project
+
+#### Elements
+
+> UI elements are the smallest atomic unit for describing page content. They can exist alone or in groups with shared qualities.
+
+Element is a small dumb component:
+
+- small
+- dumb
+- used in other components
+- built from scratch(not on top of other components)
+
+#### Collections
+
+> Collections are heterogeneous group of several ui elements which are usually found together. They may describe ui elements which do not necessarily have to be present.
+
+Collection is a group **of different similar components** inside itself.<br>
+Collection differs from views:
+
+- "view" - is a UI component that represents specific for sites content
+- "collection" - not always a UI component, not represents specific content(!)
+
+#### Modules
+
+> Modules are UI components that have behaviors as an essential part of their definition. These include things like, accordions, dropdowns, and popups, which require not only a description of how they appear, but also a set of instructions for how to implement their behaviors.
+
+When your component has some logic inside (e.g. `onClick` handler) -> you need to place this component into `/modules`.<br>
+Module is the thing that always has a **connection with a parent component**.
+
+#### Behaviors
+
+> Behaviors are instructions for UI behavior that are not attached to a particular physical form. They may describe things like, form validation, state management, or server request routing.
+
+It's probably obvious.
+
+Your components still is a component even if it works with redux using props. (E.g. Redux `store` is passed as props, or onClick handler is a function from mapDispatchToProps)
+
 #### Components
 #### Constants
 #### Containers
