@@ -3,7 +3,7 @@ Painkilling Stylёguidё for React/Redux and modern frontend development.
 
 ## Intro
 I don't think that I'm a Redux pirate or React ninja. Everything below is a result of my own experience inspired by different books, articles, videos and concepts.     
-All concepts below are aggregted in [Noir]().
+All concepts below are aggregted in [Noir] ~~right now it's react-semantic-ui-starter, but it will be renamed soon~~ .
 
 ### What to use for ...
 Almost every library has "clone". That means that you can find more than one library to solve specific task.
