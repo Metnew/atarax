@@ -13,7 +13,7 @@ All concepts below are(or will be) aggregated in [Noir] ~~right now it's react-s
 Almost every library has "clone". That means that you can find more than one library to solve a specific task.
 
 #### React.
-You can use React/Preact/Inferno. It doesn't really matter. I prefer to use React, because it's well known and tested. Preact is cool, but Inferno seems to be faster than any other lib according to some benchmarks.
+You can use React/Preact/Inferno. It doesn't really matter. I prefer using React, because it's well known and tested. Preact is cool, but Inferno seems to be faster than any other lib according to some benchmarks.
 
 Must-have libraries:
 - `react-router`(or another routing library),
@@ -70,7 +70,7 @@ When you use Flow you just create an abstraction around your dynamic-typed code 
 Standard code style is :heart: - `eslint-plugin-standard`.
 If you use Flow - include `eslint-plugin-flowtype`.
 If you care about a11y (accesibility), then use `eslint-plugin-jsx-a11y`.
-I don't recommend you to use standard only. It's better to use standard with eslint, because you get all power of customization.
+I don't recommend you to use `standard` package only. It'd be better using standard with eslint, because you'll get all power of customization.
 
 #### Babel
 Use stage-1 or stage-0, but don't use legacy decorators.
@@ -213,7 +213,7 @@ Example:
 
 ### Components
 
-I recommend to use components structure from Semantic.UI. I found it very useful in few projects.<br>
+I recommend using components structure from Semantic.UI. I found it very useful in few projects.<br>
 [Semantic.UI's glossary and explanations](http://learnsemantic.com/developing/glossary.html)
 
 "Component" doesn't mean app's components inside containers. (e.g not `containers/**/components`)
@@ -300,7 +300,7 @@ const variableThatReliesOnEnv = process.env.BROWSER
 	: 1025
 // ...
 ```
-It's a bad practice to use `window` in components/reducers/actions, instead it's better to store all code that relies on environment to `/constants` folder.
+It's a bad practice using `window` in components/reducers/actions, instead it'd better to store all code that relies on environment to `/constants` folder.
 
 ```js
 // ... Somewhere in component:
