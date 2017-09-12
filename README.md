@@ -1,12 +1,13 @@
 # atarax
-Painkilling Stylёguidё for React/Redux and modern frontend development.
+Painkilling guidё about React/Redux and modern frontend development.
 
-> Interested in your feedback :heart:.
-I'm not a native English speaker, so I'll be very grateful for every typo and mistake reported to issues or fixed by PR :smiling_imb:
+> Always interested in your feedback :heart:.
+I'm not a native English speaker, so I'll be very grateful for every typo and mistake reported to issues or fixed by PR :smiling_imp:
 
 ## Intro
-I don't think that I'm a Redux pirate or React ninja. Everything below is a result of my own experience inspired by different books, articles, videos and concepts.     
-All concepts below are(or will be) aggregated in [Noir] ~~right now it's react-semantic-ui-starter, but it will be renamed soon~~ .
+I don't think that I'm a Redux pirate or React ninja.          
+Everything below is a result of my own experience inspired by different books, articles, videos and concepts.     
+All concepts below are(or will be) aggregated in [Noir](https://github.com/Metnew/react-semantic.ui-starter) ~~right now it's react-semantic-ui-starter, but it will be renamed soon~~ .
 
 
 ### What to use for ...
@@ -42,7 +43,7 @@ I like Semantic-UI-React, because of many components out-of-box. But it's slow, 
 If you want fast UI framework then select framework powered by CSS-in-JS library like `styled-components`.
 
 #### Webpack:
-As of 2017, your project must be universal. It's very important (more info in HMR section). That means no separate server and client. Both server and client must have hot-reloading.
+As of 2017, your project must be universal. It's very important. Both server and client must be hot-reloaded.
 [My step-by-step guide]() how to achieve very simple universality.
 After a big enough experience with webpack I can recommend you next:
 1. Compile both server and client with Webpack
@@ -70,7 +71,7 @@ When you use Flow you just create an abstraction around your dynamic-typed code 
 Standard code style is :heart: - `eslint-plugin-standard`.
 If you use Flow - include `eslint-plugin-flowtype`.
 If you care about a11y (accesibility), then use `eslint-plugin-jsx-a11y`.
-I don't recommend you to use `standard` package only. It'd be better using standard with eslint, because you'll get all power of customization.
+I don't recommend you to use `standard` package instead of `eslint-plugin-standard`. It'd be better using eslint plugin because you'll get all power of customization.
 
 #### Babel
 Use stage-1 or stage-0, but don't use legacy decorators.
@@ -79,11 +80,12 @@ Add `babel-preset-react-optimize` in production.
 Add `babel-plugin-lodash` if you use lodash.
 
 #### Development
-Probably, anyone knows `redux-devtools-extension` and `react-addons-perf`. There are more interesting utils like `why-did-you-update` and `react-a11y`.
+Probably, anyone knows `redux-devtools-extension` and `react-addons-perf`.          
+There are more interesting utils like `why-did-you-update`(requires patch from maintainer) and `react-a11y`.
 
 #### Test
 Use Jest. It's very simple and powerful testing framework. But still, it requires some additional configuration for advanced projects.
-Tip: Use plugins for your IDE to view code coverage right in your editor. I use `lcov-info` for Atom.
+**Tip:** Use plugins for your IDE to view code coverage right in your editor. I use *`lcov-info`* for Atom.
 
 ### Folder structure:
 There are many approaches to structuring react/redux project.
