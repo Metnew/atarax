@@ -1,8 +1,7 @@
 # atarax
-Complex guїdё into React/Redux development
+Yet another guїdё into React/Redux development
 
-> Always interested in your feedback :heart:.
-I'm not a native English speaker, so I'll be very grateful for every typo and mistake reported to issues or fixed by PR :smiling_imp:
+> Always interested in your feedback :heart:
 
 ## Intro
 I don't think that I'm a Redux pirate or React ninja.          
