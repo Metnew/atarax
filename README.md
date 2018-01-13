@@ -1,11 +1,7 @@
 # atarax
-Yet another guїdё into React/Redux development
-
 > Always interested in your feedback :heart:
 
 ## Intro
-I don't think that I'm a Redux pirate or React ninja.          
-Everything below is a result of my own experience inspired by different books, articles, videos and concepts.     
 All concepts below are aggregated in [Suicrux](https://github.com/Metnew/suicrux).
 
 ### What to use for ...
