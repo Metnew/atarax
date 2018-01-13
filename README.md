@@ -12,7 +12,7 @@ All concepts below are aggregated in [Suicrux](https://github.com/Metnew/suicrux
 Almost every library has a “clone” (alternative). That means that you can find more than one library to solve a specific task. That means when you see a reference to React Router be sure that there is a “clone” of this library, but for Preact.
 
 #### Component-based library.
-You can use React/Preact/Inferno. It doesn’t really matter. React is well-known and canonical. Preact is small and could be used only for production. Inferno seems to be faster than any other lib according to some benchmarks.
+Almost every library has a “clone” (alternative). You can find more than one library to solve a specific task. That means when you see a reference to React Router be sure that there is a “clone” of this library, but for Preact.
 
 > But this `speed` doesn’t matter in “real-life”. 90% of speed issues caused by bad optimization of your app, not a framework. So there is no difference what library to choose(**except size**).
 
@@ -67,15 +67,15 @@ Don't know current MUI development progress, but as of July-Aug 2017:
 > “Ant design” looks great.
 
 #### Webpack
-As of 2017, your project must be universal. It's very important. Both server and client must be hot-reloaded.
+As of 2017, your project must be universal. It’s very important. Both server and client must have hot-reloading.
 
 > [Step-by-step guide how to achieve universality.](https://github.com/Metnew/tiny-universal-skeleton) Also, it’s an alternative to most solutions. One port and FS instead of 2 ports and different FSs.
 
 - Compile both server and client with Webpack
-- Create shared config for both server and client (e.g. file with used by both client and server configs loaders, plugins, entries)
+- Extract shared config for both server and client (e.g. loaders, plugins for both server and client)
 - Extract your production and development configs in a separate module and save it for the next project.
 
-> Frameworks(Next.js) and starters (razzle) supports custom Webpack configs (the end of old-fashion starters era is soon). Keep in mind, some project supports custom Webpack config only partly. That’s the only reason why starters are still used.
+> Frameworks(Next.js) and starters (razzle) supports custom Webpack configs (the end of old-fashioned starters era is soon). Keep in mind, some project supports custom Webpack config only partly. That’s the only reason why starters are still used.
 
 Some plugins you could have missed:
   - `circular-dependency-plugin`  —  detects circular dependencies
@@ -86,7 +86,7 @@ Some plugins you could have missed:
 #### Static-typing:
 Flow.
 
-Typescript is cool, modern and has more features than Flow. But keep in mind that when you use TypeScript - you dive into the TypeScript world. That means you use "another" language with own ecosystem.
+TypeScript is great and has more features than Flow. But keep in mind that when you use TypeScript - you dive into the TypeScript world. That means you use "another" language with own ecosystem.
 
 When you use Flow you just create an abstraction around your dynamic-typed code and still write JavaScript.
 
@@ -255,8 +255,7 @@ Component is an *“element”*, if…:
 > Collections are heterogeneous group of several ui elements which are usually found together. They may describe ui elements which do not necessarily have to be present.
 
 Collection is a group **of different similar components** inside itself.<br>
-Collection differs from views:
-
+*Collection* differs from *views*:
 - **"view"** - represents specific for sites content.
 - **"collection"** - doesn’t represent specific content. Grouped different components.
 
@@ -276,7 +275,7 @@ Component that doesn’t exist as UI element, but brings some logic. Like compon
 #### PWA
 Use Offline-Plugin. It requires zero config as long as you:
 1. Don't have SSR (sometimes).
-2. Don't have authorization logic that relies on location. (e.g. redirect to `/auth`, if user isn't logged in)
+2. Don't have auth logic that relies on location. (e.g. redirect to `/auth`, if user isn't logged in)
 3. Don't have other logic that interacts with location
 4. Don’t have specific requirements to caching, cache validation or anything similar that connected to offline.
 
