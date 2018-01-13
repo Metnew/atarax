@@ -7,90 +7,106 @@ I'm not a native English speaker, so I'll be very grateful for every typo and mi
 ## Intro
 I don't think that I'm a Redux pirate or React ninja.          
 Everything below is a result of my own experience inspired by different books, articles, videos and concepts.     
-All concepts below are(or will be) aggregated in [Noir](https://github.com/Metnew/react-semantic.ui-starter) ~~right now it's react-semantic-ui-starter, but it will be renamed soon~~ .
-
+All concepts below are aggregated in [Suicrux](https://github.com/Metnew/suicrux).
 
 ### What to use for ...
-Almost every library has "clone". That means that you can find more than one library to solve a specific task.
+Almost every library has a “clone” (alternative). That means that you can find more than one library to solve a specific task. That means when you see a reference to React Router be sure that there is a “clone” of this library, but for Preact.
 
-#### React.
-You can use React/Preact/Inferno. It doesn't really matter. I prefer using React, because it's well known and tested. Preact is cool, but Inferno seems to be faster than any other lib according to some benchmarks.
+#### Component-based library.
+You can use React/Preact/Inferno. It doesn’t really matter. React is well-known and canonical. Preact is small and could be used only for production. Inferno seems to be faster than any other lib according to some benchmarks.
+
+> But this `speed` doesn’t matter in “real-life”. 90% of speed issues caused by bad optimization of your app, not a framework. So there is no difference what library to choose(**except size**).
 
 Must-have libraries:
 - `react-router`(or another routing library),
 - `react-helmet`(easily manipulate <head> tag).
 
-#### Redux.
-You can use Mobx/Saga/Redux/Flux. It doesn't really matter because when you use any of these libraries you use the same flux architecture concept. I always use Redux because it's dead simple and that makes it even more powerful.
+#### Flux-architecture library.
+Mobx/Saga/Redux/Flux/Kea  —  it doesn’t really matter.
 
-Use `react-redux` to connect your react components with redux.
-Use `react-router-redux` to sync redux with location.
-Use `redux-thunk`! It's very important to use this library, but you're always can omit this. More detailed in Actions section.
-Use `reselect`. More detailed in Selectors section.
+> When you use any of these libraries — you use the same flux-architecture concept.
 
-#### Styles.
-Use `styled-components` and `postcss`.      
-There are a lot of "clones", like `glamour`, `glamourous`, `cxs`, JSCS, etc. All these libraries aimed to solve the same problem.     
-Probably, `emotion` is the best "clone", because of extract mode that makes it very fast. I didn't find any visible(!) difference in speed between styled-components and other libs.
-The main benefit of using styled-components: it's very powerful and has a rich API.
+- `redux-thunk`, `react-redux`, etc.  —  obviously.
+- `react-router-redux` —  sync your library with location. (Also, RRRv5 sometimes doesn’t work as you expect).
+- `promise-middleware` —  smart solution to use promises as an action payload and evaluate them using middleware. (will cover in next article)
 
-#### UI framework.
-Probably, [this article with a comparison of UI framework will be useful for you](https://hackernoon.com/the-coolest-react-ui-frameworks-for-your-new-react-app-ad699fffd651) to select UI framework.
-I don't like MUI:
+#### Styles & Styled components.
+> “Styled components”  —  is a design approach.  “Thinking in components, styling in components”.
+`Styled-components`  —  is a library to design styled components in React using HOCs
+
+- `styled-components` —  bloated, requires good understanding of CSS methodologies. But it’s very powerful and has a rich API.
+- `glamorous` —  API similar to `styled-components`, lightweight, good performance.
+- `emotion`  —  API similar to `styled-components`, has “extract mode” that makes it fast.
+- `glamor` —  lightweight and simple inline-css library. `glamorous` is based on `glamor`.
+
+What’s a problem with “styled components”? 
+- Sometimes hard to overwrite your CSS framework.
+- There is no styling methodology, and SMACSS/BEM/etc. will not work well.
+- Sometimes you could incorrectly connect your app logic with styles.
+
+You have to design your own styling strategy to write configurable, fast, composable components. Personally, I didn’t find any new methodology for styled components, but can give you some recommendations:
+- Don’t pass too many different props.
+- Don’t make a styled component for every custom component in your app.
+- HOCs could save you a lot of time.
+- Don’t mix logic props and UI props (font size, color)
+
+Remember that all these libraries were created to solve same issues.
+
+#### UI
+Probably, [this article with a comparison](https://hackernoon.com/the-coolest-react-ui-frameworks-for-your-new-react-app-ad699fffd651) of different UI frameworks could help you select a framework for the next project.
+
+If you want fast UI framework then select a framework powered by library like `styled-components` or inline-css lib.
+
+Don't know current MUI development progress, but as of July-Aug 2017:
+
+> Don’t know current MUI development progress, but as of July-Aug 2017:
 - it was(!) slow, but according to the latest news right now perf is better.
-- I don't like design, it's not 100% material.
-I like Semantic-UI-React, because of many components out-of-box. But it's slow, because it requires full Semantic CSS file. (548 kb ungzipped).    
-If you want fast UI framework then select framework powered by CSS-in-JS library like `styled-components`.
+- design isn’t 100% material.
 
-#### Webpack:
+> Semantic-UI-React  —  many components out-of-box, but requires full Semantic CSS file. (548 kb ungzipped).
+
+> “Ant design” looks great.
+
+#### Webpack
 As of 2017, your project must be universal. It's very important. Both server and client must be hot-reloaded.
-[My step-by-step guide]() how to achieve very simple universality.
-After a big enough experience with webpack I can recommend you next:
-1. Compile both server and client with Webpack
-2. Create shared config for both server and client (e.g. file with used by both client and server configs loaders, plugins, entries)
 
-Must-have plugins that you probably have missed:
-  - webpack-bundle-analyzer - there are similar webpack-dashboards, but they ship similar functionality with better UI
-  - circular-dependency-plugin - find circular dependencies in code
-  - autodll-webpack-plugin - minimize build time
-  - favicons-webpack-plugin - generate favicons for browsers based on your logo
-  - webpack-common-shake - tree-shaling for CommonJS
-  - webpack-stats-plugin - Get webpack stats
-  - write-file-webpack-plugin - Write files from memory filesystem to real filesystem. (e.g. write files from webpack-dev-middleware to filesystem)
-  - assets-webpack-plugin - get links to files from stats, but in better way (similar to webpack-stats-plugin)
+> [Step-by-step guide how to achieve universality.](https://github.com/Metnew/tiny-universal-skeleton) Also, it’s an alternative to most solutions. One port and FS instead of 2 ports and different FSs.
+
+- Compile both server and client with Webpack
+- Create shared config for both server and client (e.g. file with used by both client and server configs loaders, plugins, entries)
+- Extract your production and development configs in a separate module and save it for the next project.
+
+> Frameworks(Next.js) and starters (razzle) supports custom Webpack configs (the end of old-fashion starters era is soon). Keep in mind, some project supports custom Webpack config only partly. That’s the only reason why starters are still used.
+
+Some plugins you could have missed:
+  - `circular-dependency-plugin`  —  detects circular dependencies
+  - `autodll-webpack-plugin`  —  recompile only updated code, without vendor bundle
+  - `write-file-webpack-plugin`  —  write files from memory FS to real FS. (e.g. write files from webpack-dev-middleware to FS)
+  - `assets-webpack-plugin`  —  get webpack stats (similar to `webpack-stats-plugin`, but better)
 
 #### Static-typing:
-Use Flow.
+Flow.
 
-Typescript is cool, modern and has more features than Flow. But keep in mind that when you use TypeScript - you dive into the TypeScript world. That means you use another language with own ecosystem.
+Typescript is cool, modern and has more features than Flow. But keep in mind that when you use TypeScript - you dive into the TypeScript world. That means you use "another" language with own ecosystem.
 
 When you use Flow you just create an abstraction around your dynamic-typed code and still write JavaScript.
-**Tip:** Use `flow-ide` package for Atom for better development experience.
 
 #### ESlint:
-Standard code style is :heart: - `eslint-plugin-standard`.
-If you use Flow - include `eslint-plugin-flowtype`.
+Standard code style is :heart:.
 If you care about a11y (accesibility), then use `eslint-plugin-jsx-a11y`.
-I don't recommend you to use `standard` package instead of `eslint-plugin-standard`. It'd be better using eslint plugin because you'll get all power of customization.
+
+> It’d be better to use `eslint-plugin-standard` than standard package, some default Standard rules are annoying, like `no-tabs`, `no-unused-vars` and `indent`.
 
 #### Babel
-Use stage-1 or stage-0, but don't use legacy decorators.
-If you use Flow - include `babel-preset-flow`.
 Add `babel-preset-react-optimize` in production.
-Add `babel-plugin-lodash` if you use lodash.
+Don’t forget to add `styled-components` plugin, if you use `styled-components` library. 
+Also, `module-resolver` plugin is very useful.
 
-#### Development
-Probably, anyone knows `redux-devtools-extension` and `react-addons-perf`.          
-There are more interesting utils like `why-did-you-update`(requires patch from maintainer) and `react-a11y`.
-
-#### Test
-Use Jest. It's very simple and powerful testing framework. But still, it requires some additional configuration for advanced projects.
-**Tip:** Use plugins for your IDE to view code coverage right in your editor. I use *`lcov-info`* for Atom.
 
 ### Folder structure:
-There are many approaches to structuring react/redux project.
-Personally, I've found next structure as the best solution:
-`/root` project's folder:
+
+There are many approaches to structuring react/redux project. Keep in mind, that this structure may vary according to your framework, setup, etc. For example, Next.js, CRA already have some predefined folders.
+
 ```
 ├── ...
 ├── jest_config         # Jest configuration lives here
@@ -104,12 +120,12 @@ Personally, I've found next structure as the best solution:
 ├── ...
 ```
 
-Probably, code inside `jest_config` and `webpack_config` is almost obvious. So let's take a look at the `/src` folder.
+Probably, jest_config and webpack_config dirs are obvious. So let’s take a look at the /src folder.
 
 #### `/src/client`
 Here we store code that renders the app in a browser.
-This code includes import of framework styles, polyfills and app rendering in a browser.
-It looks like:
+This is your browser entry  —  code that renders an app in a browser, imports framework styles, polyfills, your global styles, PWA setup. It could be in `/common` folder too, but putting it into distinct folder seems more semantically correct.
+
 ```js
 // Styles
 import 'semantic-ui-css/semantic.css'
@@ -120,7 +136,7 @@ import 'isomorphic-fetch'
 import React from 'react'
 import ReactDOM, {render} from 'react-dom'
 import {configureApp, configureRootComponent} from 'common/app'
-
+//
 const initialState = window.__INITIAL_STATE__ || {}
 const propsForRoot = configureApp(initialState)
 const RootComponent = configureRootComponent(propsForRoot)
@@ -133,55 +149,46 @@ if (module.hot) {
 ```
 
 #### `/src/server`
-Your server-side code. More about this in next sections.
+Your server-side code.
 
 #### `/src/common`
-That's the place where the most interesting things happen. Unless your project isn't a Hello World app you'll care about the structure of this folder.
+That’s the place where the most interesting things happen. 
 ```
-/common
-├── actions         # Your actions here  
-├── api             # API stuff (requests, wrappers for requests)
-├── app             # Main configuration stuff
-├── components   
-├── constants    
-├── containers        
-├── pwa        
-├── reducers        
-├── selectors   
-├── styles        
-├── types   
-
+ /common
+├── actions # Actions 
+├── api # API (requests, data management utils)
+├── app # App core(boot loader)
+├── components # Reusable components
+├── constants # Constant values, like months names, etc.
+├── containers # App routes
+├── pwa # Progressive Web App code (optional)
+├── reducers 
+├── selectors 
+├── styles # Styled components + global CSS
+├── types # Flow types for your app’s entities
 ```
 
-### Actions
+### Routes (`/containers`)
+Almost every route has own `/components` folder where specific for this route components are stored, i.e.:
 
-Every async action must have 4 states:
-- PENDING
-- SUCCESS
-- FAIL
-- FINALLY
-
-
-PENDING
+- container = `containers/App/index.jsx`
+- route’s component = `containers/App/components/SomeAppItem.jsx`
 
 ### API
-#### Don't mix API stuff with Redux stuff.
-There are many examples where API logic is connected with Redux actions logic. For example, when people use `dispatch` directly inside the `fetch()` response:
-```js
-// Where `dispatch` is Redux's `dispatch` function
-fetch('/hello')
-  .then((res) => dispatch('SUCCESS', res))
-  .catch((e) => dispatch('FAIL', e))
-```
-It's not recommended, because of [principal of minimal knowledge](https://en.wikipedia.org/wiki/Law_of_Demeter). Instead of this, your `fetch()` (or another API agent/service) must return value about request response status. And then this value **must be evaluated by Redux**.
 
-Solution:
-`fetch` response has `ok` property that can be used as an indicator of your request result.
 
+**Don't mix API requests with Redux with React containers!**
+Always try to distinct parts of your app into autonomous libraries.
+[Principal of minimal knowledge](https://en.wikipedia.org/wiki/Law_of_Demeter).
+Review on all approaches to work with async actions in Redux.
+
+
+
+### Components
 
 ### Component vs PureComponent vs "stateless component"
 
-[Good note about it.](https://stackoverflow.com/questions/40703675/react-functional-stateless-component-purecomponent-component-what-are-the-dif)
+[Note](https://stackoverflow.com/questions/40703675/react-functional-stateless-component-purecomponent-component-what-are-the-dif)
 
 ```javascript
 if (componentHasNoState) {
@@ -193,6 +200,8 @@ if (componentHasNoState) {
 }
 ```
 
+Keep in mind, that change of component type doesn’t guarantee performance improve.
+
 ### Containers vs Components
 
 Follow Dan's guide:
@@ -200,42 +209,24 @@ Follow Dan's guide:
 - **Container** - "smart" React component connected to Redux state.
 - **Component** - "dumb" React component that uses only own props. Can't be connected to Redux.
 
-### Containers
+<hr />
 
-Almost every container (except very-very simple) has own `/components` folder where it stores:
-
-- components specific for this route
-- main container's component ("root" component)
-
-Example:
-
-- container = `containers/App/index.jsx`
-- specific components = `containers/App/components/SomeAppItem.jsx`
-- "root" component = `containers/App/components/index.jsx`
-
-### Components
-
-I recommend using components structure from Semantic.UI. I found it very useful in few projects.<br>
-[Semantic.UI's glossary and explanations](http://learnsemantic.com/developing/glossary.html)
-
-"Component" doesn't mean app's components inside containers. (e.g not `containers/**/components`)
+There are no practical recommendations about structuring `/components` folder, except “Atomic” approaches and other heuristics (*those have never worked for me*). Semantic UI glossary proposes similar to “Atomic” approach that works better than analogs (but still isn’t perfect).
 
 > A component is a general term used to refer to any user interface element packaged for distribution.
 
 ### Parts
 
-Imagine that you have `Sidebar` component configured from `App` container, then **`Sidebar` is a singleton**. Store components that **exist in a single instance in "/parts"**.          
-Another example: only one instance of `Header` could live in a whole app.
-Summary:
-  - singleton
-  - very big component/container with a complex logic
+There are always components that exist in **one instance**, like Sidebar, Header, Footer, etc. Store singletons in `/parts`.
+
+> SUI doesn’t propose “parts”.
+
 
 #### Views
 
 > A view is a common design trope for presenting specific types of website content like comments, or user activity. These are common views: comments, activity feeds, content cards, that are presented in a similar fashion across most websites.
 
-If a component is **huge**, **contains many other components** inside itself and **takes a big place in UI**, but **it's dumb**(or not so "smart" to be called module) then it's probably a "View" component. View:
-
+If a component is a parent for other components, **represent some content**, and **it’s dumb** then it’s probably a View.
 Summary:
 
 - huge component
@@ -245,25 +236,20 @@ Summary:
 
 #### Addons
 
-Component is an _addon_, if this component is a commonly used component **built on top of another component**, includes **some custom code**, is a **wrapper** for another component, or just a thing that must be **delegated to a separate lib.**
+Component may be an *addon*, if this component is a **wrapper** for another component, or a component that could be perfectly replaced by a library, but was developed from scratch (*custom spinners, progress bars*).
 
-Summary:
-
-- build on top of another component (!, otherwise, it's a Module)
-- include some custom code (enough "smart")
-- is a wrapper for another component
-- small lib implemented inside the project
+Component is an *“addon”*, if...:
+- it’s a wrapper for another component
+- it is small lib implemented inside the project
 
 #### Elements
 
 > UI elements are the smallest atomic unit for describing page content. They can exist alone or in groups with shared qualities.
 
-Element is a small dumb component:
-
-- small
-- dumb
-- used in other components
-- built from scratch(not on top of other components)
+Component is an *“element”*, if…:
+- small + dumb
+- widely used in other components
+- built from scratch
 
 #### Collections
 
@@ -272,115 +258,74 @@ Element is a small dumb component:
 Collection is a group **of different similar components** inside itself.<br>
 Collection differs from views:
 
-- "view" - is a UI component that represents specific for sites content
-- "collection" - not always a UI component, not represents specific content(!)
+- **"view"** - represents specific for sites content.
+- **"collection"** - doesn’t represent specific content. Grouped different components.
 
 #### Modules
 
 > Modules are UI components that have behaviors as an essential part of their definition. These include things like, accordions, dropdowns, and popups, which require not only a description of how they appear, but also a set of instructions for how to implement their behaviours.
 
-When your component has some logic inside (e.g. `onClick` handler) -> you need to place this component into `/modules`.<br>
-Module is the thing that always has a **connection with a parent component**.
+When your component has some logic inside (e.g. `onClick` handler), this component is a module. *Module is a **component** logically connected to a parent component.*
 
 #### Behaviors
 
 > Behaviors are instructions for UI behaviour that are not attached to a particular physical form. They may describe things like, form validation, state management, or server request routing.
 
-It's probably obvious.
+Component that doesn’t exist as UI element, but brings some logic. Like components those implement animations. Example: `react-motion` and `react-fns`
 
-Your components still is a component even if it works with redux using props. (E.g. Redux `store` is passed as props, or onClick handler is a function from mapDispatchToProps)
-
-#### Constants
-We can store not only constants in `/constants` folder. I found using `/constants` very useful for some stuff that *might be* constant. When you work with isomorphic code you often use next construction:
-```js
-// ... Somewhere in component:
-// If it's a browser
-//                  then get something from window
-//                  else return constant that used on server
-const variableThatReliesOnEnv = process.env.BROWSER
-	? window && window.myVar
-	: 1025
-// ...
-```
-It's a bad practice using `window` in components/reducers/actions, instead it'd better to store all code that relies on environment to `/constants` folder.
-
-```js
-// ... Somewhere in component:
-import {getMyVar} from 'constants'
-const myVar = getMyVar(process.env.BROWSER)
-const varMy = getVarMy(process.env.BROWSER)
-
-// ...
-```
-
-```js
-// In '/constants' folder
-const getMyVar = (isBrowser) => isBrowser ? window.myVar : 1025
-const getVarMy = (isBrowser) => isBrowser ? window.myVar : "hello world!"
-// ...
-```
 
 #### PWA
 Use Offline-Plugin. It requires zero config as long as you:
-1. don't have SSR
-2. don't have authorization logic that relies on `window.location`. (e.g. redirect to `/auth`, if user isn't logged in)
-3. don't have other logic that interacts with `window.location`
-4. don't have specific requirements about caching, cache validation or anything similar that connected to offline/caching.
+1. Don't have SSR (sometimes).
+2. Don't have authorization logic that relies on location. (e.g. redirect to `/auth`, if user isn't logged in)
+3. Don't have other logic that interacts with location
+4. Don’t have specific requirements to caching, cache validation or anything similar that connected to offline.
 
-If you got one of these points - your Offline-Plugin config will be more complicated than you think. I **strongly recommend** you to test/validate/investigate that your config is still right before *every deploy.*
+If you got one of these features —  it’d be better to test your PWA setup in *different browsers with different behaviors/app flows.*
 
 #### Reducers
-Something important about reducers...
-One day I found this article - [Dissecting Twitter’s Redux Store](https://medium.com/statuscode/dissecting-twitters-redux-store-d7280b62c6b1). That was the day when I realized that 95% of all states in my app can be interpreted as:
+>  [Dissecting Twitter’s Redux Store](https://medium.com/statuscode/dissecting-twitters-redux-store-d7280b62c6b1).
+You can make your own research and dissect any popular app. Pinterest, for example.
 
+95% of all states in any app can be interpreted as:
 ```ts
 interface State {
 	entities: object;
 	fetchStatus: 'none' | 'loading' | 'loaded';
 	errors: object;
-	isLoading?: boolean;
-	isLoaded?: boolean;
 }
 ```
 
-The main key to Redux development: **Your state is just an in-memory DB.** Think about a state as about collection in NoSQL DBs (e.g. Mongo).
+The main key to Redux development:
+> Your state is just an in-memory DB. 
 
+> Don’t store things those could be computed by selectors.
 
 #### Selectors
-Always use selectors!          
-What is "selector"? I mentioned above `reselect`. If you're not familiar with `reselect` - check docs.
-Shortly, function composition is a cool thing, but there is more practical usage for selectors.
+> Always use selectors, it’s very important!
+
+What is a "selector"?
+
 If your `mapStateToProps` looks like:
 ```js
 const mapStateToProps = (state) => {
   // BAD!!!
-  const {variable} = state.me.vars.lol.hello.world
+  const {variable} = state.let.var.be.const.hello.world
   return {variable}
 }
 ```
-Then you're doing that wrong, because every time your state structure changes, you need to fix path to the property in every mapStateToProps function.
 
-Instead use the next structure:
+Then you’re doing that wrong, because:
+- every time the way you compute some value changes, you have to change it across a whole app.
+- every time your state structure changes, you have  to fix path to the property across a whole app.
+- you connect your computational(selectional) logic with your container, container shouldn’t know about it.
+
+Instead:
 ```js
 import {getThatState} from 'selectors'
 // ...
 const mapStateToProps = (state) => {
   // GOOD!
-  const {variable} = getThatState(state)
-  return {variable}
+  return {variable: getThatVariable(state)}
 }
-```
-
-Tip: if you use `lodash` you can do something like:
-```js
-const selectorCreator = path => (state, ...args) => {
-  // get state
-	const gotThisState = _.get(state)
-  // if there are any additional args
-	const gotArgs = args.length > 0
-  // get properties based on additional args from selected state
-	return gotArgs ? _.pick(gotThisState, _.flatten(args)) : gotThisState
-}
-
-export const getEntitiesUsersState = selectorCreator('entities.users')
 ```
